@@ -10,14 +10,16 @@ $(document).ready(function() {
 		$(this).toggleClass("hidden");
 		$(this).parent().find("#signup_form").toggleClass("hidden");
 		$("#login_button").toggleClass("hidden");
-		$("#logout_button").toggleClass("hidden");
+		$("#logout_button").toggleClass("hidden");s
 	});
+	// $("#join_game").click(function() {
+
+	// })
 	$("#new_game").click(function() {
 		$(this).toggleClass("hidden");
-		$(".game").toggleClass("hidden");
-		var classNames = $(".game").attr("class").split(" ");
-		var firstPlayerId = parseInt(classNames[classNames.length-1]);
-		var data = { firstPlayerId: firstPlayerId }
+		var classNames = $("#new_game").attr("class").split(" ");
+		var className = classNames[0].split("-")[1];
+		var data = { firstPlayerId: className }
 		$.ajax({
 			dataType: "json",
 			method: "POST", 
@@ -27,6 +29,12 @@ $(document).ready(function() {
 			console.log(response);
 		})
 	});
+	$(".cell").click(function() {
+		$(this).append("<h2 class='huge'>X</h2>")
+	})
+
+
+	// setInterval(function(){ alert("Hello"); }, 3000);
 
 
 })

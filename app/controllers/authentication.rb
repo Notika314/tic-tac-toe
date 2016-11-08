@@ -2,7 +2,7 @@ post "/authentication/login" do
 	@player = Player.find_by(username: params['username'])
 	if @player
 		session['player_id'] = @player.id
-		redirect "/game/index"
+		redirect "/games/index"
 	else
 		redirect "/"
 	end
@@ -18,7 +18,7 @@ post "/authentication/signup" do
 		@player = Player.new(username: params['username'], email: params['email'], password: params['password'])
 		if @player.save
 			session['player_id'] = @player.id
-			redirect "/game/index"
+			redirect "/games/index"
 		else
 			[400,"could not save user, try different email"]
 		end

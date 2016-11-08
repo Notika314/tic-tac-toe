@@ -1,8 +1,8 @@
-get '/game/index' do 
+get '/games/index' do 
 	@player = Player.find_by(id: session['player_id'])
 	@players = Player.all
 	@games = Game.all { include :player1 }
-	erb :"/game"
+	erb :"/games"
 end
 
 post "/games" do 
@@ -17,7 +17,11 @@ end
 
 put "/games/:id" do 
 	@game = Game.find_by(id: params['id'])
-	player2 = current_user
 	@game.update(player2_id: current_user.id)
-	 p @game
+	redirect "/games/#{@game.id}"
+end
+
+get "/games/:id" do 
+	@game = Game.find_by(id: params[:id])
+	erb :"/game"
 end
