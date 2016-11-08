@@ -1,0 +1,37 @@
+<div id="header">
+	<% unless current_user %>
+	<div class="inline space">
+		<a href="/"><button>HOME</button></a>
+	</div>
+	<div class="inline space" >
+		<button id="login_button">Login</button>
+		<form id="login_form" class="hidden" action="/authentication/login" method="POST">
+			<label>Username:</label><br>
+			<input type="text" name="username" placeholder = "USERNAME" /><br>
+			<label>Password:</label><br>
+			<input type="password" name="password" placeholder="PASSWORD" /><br>
+			<input type="submit" value="LOGIN" /><br>
+		</form>
+	</div>
+
+	<div class="inline space">
+		<button id="signup_button">Create account</button>
+		<form id="signup_form" class="hidden" action="/authentication/signup" method="POST">
+			<label>USERNAME:</label><br>
+			<input type="text" name="username" placeholder="USERNAME" /><br>
+			<label>EMAIL:</label><br>
+			<input type="text" name="email" placeholder="EMAIL" /><br>
+			<label>PASSWORD</label><br>
+			<input ytpe="password" name="password" placeholder="PASSWORD" /><br>
+			<label>PASSWORD CONFIRM:</label><br>
+			<input type="password" name="password_confirm" placeholder="CONFIRM PASSWORD" /><br>
+			<input type="submit" value = "SIGNUP" />
+		</form>
+	</div>
+	<% else %>
+
+	<div class="inline space">
+		<a href="/authentication/logout"><button id="logout_button">LOGOUT</button></a>
+	</div>
+	<% end %>
+</div>

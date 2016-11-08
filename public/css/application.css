@@ -1,0 +1,29 @@
+.inline {
+	display: inline;
+}
+.space {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+button {
+	width: 160px;
+	height: 50px;
+	font-family: arial;
+	border-radius: 10px;
+}
+.hidden {
+	display: none;
+}
+#header {
+	margin-top: 50px;
+}
+
+.game {
+	margin: 40px;
+}
+
+.game td {
+	height: 90px;
+	width: 90px;
+	border: 5px solid black;
+}
