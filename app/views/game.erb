@@ -1,6 +1,7 @@
-<h3 class="my_turn">Player1: <%= @game.player1.username %>
+<h3 id=<%=@game.player1.id %> class="my_turn">Player1: <%= @game.player1.username %>
 </h3>
-<h3>Player2: <%= @game.player2.username %></h3>
+<h3 id=<%= @game.player2.id %> class="opponent">Player2: <%= @game.player2.username %></h3>
+<button id="letsStart">Begin</button>
 <table class="game <%= current_user['id'] %>" >
 	<tr class="row">
 		<td class="cell"></td>

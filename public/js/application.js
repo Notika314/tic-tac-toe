@@ -1,4 +1,7 @@
 // alert("hi")
+var outside ={
+	empty: true,
+};
 $(document).ready(function() {
 	$("#login_button").click(function() {
 		$(this).toggleClass("hidden");
@@ -29,9 +32,22 @@ $(document).ready(function() {
 			console.log(response);
 		})
 	});
+
+	$("#letsStart").click(function() {
+		var player1 = $(".my_turn").attr("id");
+		var player2 = $(".opponent").attr("id");
+		outside.game = new Game(player1,player2);
+		outside.empty = "false";	//how to pass game so it exists on the page?
+	});
+	console.log(outside);
 	$(".cell").click(function() {
-		$(this).append("<h2 class='huge'>X</h2>")
-	})
+		var cell = this;
+		if (outside.game.me.active===true) {
+			$(this).append("<h2 class='huge'></h2>");
+			$(this).addClass("taken");
+			outside.game.movePlayer(cell);
+		}
+	});
 
 
 	// setInterval(function(){ alert("Hello"); }, 3000);
