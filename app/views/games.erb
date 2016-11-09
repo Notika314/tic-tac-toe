@@ -1,31 +1,35 @@
 <h1>Game is about to begin</h1>
 <button id="new_game" class="player-<%= current_user['id'] %>">Start new game</button>
 
-<h2>ALL GAMES:</h2>
-<% @games.each do |game| %>
-	<h3>Play with <%= game.player1.username %> </h3>
-	<form id="join_game" action="/games/<%= game.id %>" method="POST">
-		<input type="hidden" name="_method" value="PUT" />
-		<input type="submit" value="JOIN" />
-	</form>
-<% end %>
+<div id="all-games">
+	<h2>ALL GAMES:</h2>
+	<% @games.each do |game| %>
+		<% unless game.player1.id == current_user.id %>
+			<h3>Play with <%= game.player1.username %> </h3>
+			<form id="join_game" action="/games/<%= game.id %>" method="POST">
+				<input type="hidden" name="_method" value="PUT" />
+				<input type="submit" value="JOIN" />
+			</form>
+		<% end %>
+	<% end %>
+</div>
 
-									<% if false %> 
-										<table class="game hidden <%= current_user['id'] %>" >
-											<tr class="row">
-												<td class="cell"></td>
-												<td class="cell"></td>
-												<td class="cell"></td>
-											</tr>
-											<tr class="row">
-												<td class="cell"></td>
-												<td class="cell"></td>
-												<td class="cell"></td>
-											</tr>
-											<tr class="row">
-												<td class="cell"></td>
-												<td class="cell"></td>
-												<td class="cell"></td>
-											</tr>
-										</table>
-									<% end %>
+
+<table class="game hidden <%= current_user['id'] %>" >
+	<tr class="row">
+		<td class="cell"></td>
+		<td class="cell"></td>
+		<td class="cell"></td>
+	</tr>
+	<tr class="row">
+		<td class="cell"></td>
+		<td class="cell"></td>
+		<td class="cell"></td>
+	</tr>
+	<tr class="row">
+		<td class="cell"></td>
+		<td class="cell"></td>
+		<td class="cell"></td>
+	</tr>
+</table>
+

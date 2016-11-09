@@ -12,6 +12,7 @@ class Game < ActiveRecord::Base
 	end
 
 	def update_cell(id, new_content)
-		cell.update!(coordinates: new_content)
+		@cell= Cell.find_by(coordinates: id)
+		@cell.update!(content: new_content)
 	end
 end

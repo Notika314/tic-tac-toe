@@ -20,6 +20,8 @@ $(document).ready(function() {
 	// })
 	$("#new_game").click(function() {
 		$(this).toggleClass("hidden");
+		$("#all-games").toggleClass("hidden");
+		$("table").toggleClass("hidden");
 		var classNames = $("#new_game").attr("class").split(" ");
 		var className = classNames[0].split("-")[1];
 		var data = { firstPlayerId: className }
@@ -39,13 +41,13 @@ $(document).ready(function() {
 		outside.game = new Game(player1,player2);
 		outside.empty = "false";	//how to pass game so it exists on the page?
 	});
-	console.log(outside);
 	$(".cell").click(function() {
 		var cell = this;
-		if (outside.game.me.active===true) {
+		var gameId = $("table").attr("id").split("-")[1];
+		if (outside.game.me.active===true && $(cell).text()=="") {
 			$(this).append("<h2 class='huge'></h2>");
 			$(this).addClass("taken");
-			outside.game.movePlayer(cell);
+			outside.game.movePlayer(cell,gameId);
 		}
 	});
 

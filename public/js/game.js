@@ -6,8 +6,8 @@ var Game = function(id1,id2) {
 	this.me = new Player(id2,status1);
 	this.players.push(this.me);
 	this.players.push(this.opponent);
-	this.movePlayer = function(cell) {
-		this.me.move(cell);
+	this.movePlayer = function(cell,gameId) {
+		this.me.move(cell,gameId);
 		//insert "X" or "O" in cell, depending on player
 	}
 }
@@ -19,10 +19,32 @@ var Player = function(id,status) {
 		this.active = false;
 	}
 	this.id = id;
-	this.move = function(cell) {
+	this.move = function(cell,gameId) {
 		this.active = false;
 		var text = document.createTextNode("X");     // Create a text node
 		cell.appendChild(text);
+		var cell = cell;
+		cellId = $(cell).attr("id");
+		var data = { game_id: gameId, content: "X", coordinates: cellId }
+		$.ajax({
+			dataType: "json",
+			method: "PUT",
+			url: "../cells/" + cellId,
+			data: data
+		}).done(function(response) {
+			console.log(response);
+		})
+		
+
+
+		// $.ajax({
+		// 	dataType: "json",
+		// 	method: "POST", 
+		// 	url: "/games", 
+		// 	data: data
+		// }).done(function(response) {
+		// 	console.log(response);
+		// })
 	}
 }
 

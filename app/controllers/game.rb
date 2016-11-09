@@ -25,3 +25,7 @@ get "/games/:id" do
 	@game = Game.find_by(id: params[:id])
 	erb :"/game"
 end
+
+# put "/cells/:id" do 
+# 	p params
+# end

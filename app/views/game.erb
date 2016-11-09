@@ -2,20 +2,20 @@
 </h3>
 <h3 id=<%= @game.player2.id %> class="opponent">Player2: <%= @game.player2.username %></h3>
 <button id="letsStart">Begin</button>
-<table class="game <%= current_user['id'] %>" >
+<table id ="game-<%= @game.id %>" class="game <%= current_user.id %>" >
 	<tr class="row">
-		<td class="cell"></td>
-		<td class="cell"></td>
-		<td class="cell"></td>
+		<td id="0" class="cell"></td>
+		<td id="1" class="cell"></td>
+		<td id="2" class="cell"></td>
 	</tr>
 	<tr class="row">
-		<td class="cell"></td>
-		<td class="cell"></td>
-		<td class="cell"></td>
+		<td id="3" class="cell"></td>
+		<td id="4" class="cell"></td>
+		<td id="5" class="cell"></td>
 	</tr>
 	<tr class="row">
-		<td class="cell"></td>
-		<td class="cell"></td>
-		<td class="cell"></td>
+		<td id="6" class="cell"></td>
+		<td id="7" class="cell"></td>
+		<td id="8" class="cell"></td>
 	</tr>
 </table>
