@@ -14,22 +14,48 @@
 	<% end %>
 </div>
 
-
-<table class="game hidden <%= current_user['id'] %>" >
+<h3 class="my_turn hidden">Player1: <%= current_user.username %></h3>
+<h3 class="opponent hidden"></h3>
+<table id=<%= current_user.id %> class="game hidden <%= current_user['id'] %>" >
 	<tr class="row">
-		<td class="cell"></td>
-		<td class="cell"></td>
-		<td class="cell"></td>
+		<td id="0" class="cell"></td>
+		<td id="1" class="cell"></td>
+		<td id="2" class="cell"></td>
 	</tr>
 	<tr class="row">
-		<td class="cell"></td>
-		<td class="cell"></td>
-		<td class="cell"></td>
+		<td id="3" class="cell"></td>
+		<td id="4" class="cell"></td>
+		<td id="5" class="cell"></td>
 	</tr>
 	<tr class="row">
-		<td class="cell"></td>
-		<td class="cell"></td>
-		<td class="cell"></td>
+		<td id="6" class="cell"></td>
+		<td id="7" class="cell"></td>
+		<td id="8" class="cell"></td>
 	</tr>
 </table>
 
+
+<% if false %>
+
+<h3 id=<%=@game.player1.id %> class="my_turn">Player1: <%= @game.player1.username %>
+</h3>
+<h3 id=<%= @game.player2.id %> class="opponent">Player2: <%= @game.player2.username %></h3>
+<button id="letsStart">Begin</button>
+<table id ="game-<%= @game.id %>" class="game <%= current_user.id %>" >
+	<tr class="row">
+		<td id="0" class="cell"></td>
+		<td id="1" class="cell"></td>
+		<td id="2" class="cell"></td>
+	</tr>
+	<tr class="row">
+		<td id="3" class="cell"></td>
+		<td id="4" class="cell"></td>
+		<td id="5" class="cell"></td>
+	</tr>
+	<tr class="row">
+		<td id="6" class="cell"></td>
+		<td id="7" class="cell"></td>
+		<td id="8" class="cell"></td>
+	</tr>
+</table>
+<% end %>

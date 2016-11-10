@@ -4,6 +4,7 @@ class CreateCells < ActiveRecord::Migration
   		t.string :content
   		t.integer :game_id
   		t.string :coordinates
+  		t.string :new_update
   		
   		t.timestamps null: false
   	end

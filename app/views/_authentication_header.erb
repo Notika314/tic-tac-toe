@@ -1,8 +1,8 @@
 <div id="header">
-	<% unless current_user %>
 	<div class="inline space">
 		<a href="/"><button>HOME</button></a>
 	</div>
+	<% unless current_user %>
 	<div class="inline space" >
 		<button id="login_button">Login</button>
 		<form id="login_form" class="hidden" action="/authentication/login" method="POST">
@@ -29,7 +29,9 @@
 		</form>
 	</div>
 	<% else %>
-
+	<div class="inline space">
+		<a href="/games/index"><button>Main page</button></a>
+	</div>
 	<div class="inline space">
 		<a href="/authentication/logout"><button id="logout_button">LOGOUT</button></a>
 	</div>

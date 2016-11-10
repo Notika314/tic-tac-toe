@@ -2,8 +2,17 @@ var Game = function(id1,id2) {
 	this.players = [];
 	var status1 = "me";
 	var status2 = "opponent";
+	if (id2 == undefined) {
+		this.me = new Player(id1, status1);
+		this.me.active=false;
+		this.opponent = new Player(id2,status2);
+		this.opponent.active=false;
+	} else {
 	this.opponent = new Player(id1,status2)
+	this.opponent.active=false;
 	this.me = new Player(id2,status1);
+	this.me.active=false;
+	}
 	this.players.push(this.me);
 	this.players.push(this.opponent);
 	this.movePlayer = function(cell,gameId) {
@@ -13,11 +22,6 @@ var Game = function(id1,id2) {
 }
 var Player = function(id,status) {
 	this.status = status;
-	if (this.status === "me") { 
-		this.active = true;
-	} else {
-		this.active = false;
-	}
 	this.id = id;
 	this.move = function(cell,gameId) {
 		this.active = false;
@@ -34,17 +38,6 @@ var Player = function(id,status) {
 		}).done(function(response) {
 			console.log(response);
 		})
-		
-
-
-		// $.ajax({
-		// 	dataType: "json",
-		// 	method: "POST", 
-		// 	url: "/games", 
-		// 	data: data
-		// }).done(function(response) {
-		// 	console.log(response);
-		// })
 	}
 }
 

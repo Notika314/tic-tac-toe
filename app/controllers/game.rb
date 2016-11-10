@@ -8,7 +8,8 @@ end
 post "/games" do 
 	if request.xhr?
 		id = params['firstPlayerId']
-		first_player = Player.find_by(id: id.to_i )
+		first_player = Player.find_by(id: id.to_i)
+		first_player.update!(player_type: "player1")
 		@game = Game.create(player1: first_player)
 		content_type :json
 		{ game: @game }.to_json
@@ -16,16 +17,33 @@ post "/games" do
 end
 
 put "/games/:id" do 
-	@game = Game.find_by(id: params['id'])
-	@game.update(player2_id: current_user.id)
+	@game = Game.find_by(id: params[:id])
+	@player2 = current_user
+	@player2.update!(player_type: "player2")
+	@game.update(player2_id: current_user.id, joined: true)
 	redirect "/games/#{@game.id}"
 end
 
 get "/games/:id" do 
 	@game = Game.find_by(id: params[:id])
-	erb :"/game"
+	if request.xhr? 
+		content_type :json
+		{yse: "true"}.to_json
+	else
+		erb :"game"
+	end
 end
 
-# put "/cells/:id" do 
-# 	p params
-# end
+get "/games/:id/check_update" do 
+	# Employees.where(company_id: company_id, race: 'African',  foreign: 1).pluck(:id_number)
+	@game = Game.find_by(id: params[:id])
+	@updated_cell = Cell.where( new_update: "yes",content: "X",game_id: @game.id).last(1)
+
+	unless @game.player2_id.nil?
+		@player = Player.find_by(id: @game.player2_id)
+		@player_name = @player.username
+	end
+	@joined = @game.joined
+	content_type :json
+	{ cell: @updated_cell , joined: @joined, game: @game , player2_name: @player_name }.to_json
+end
