@@ -25,11 +25,11 @@ var Player = function(id,status) {
 	this.id = id;
 	this.move = function(cell,gameId) {
 		this.active = false;
-		var text = document.createTextNode("X");     // Create a text node
+		var text = document.createTextNode(outside.sign);     // Create a text node
 		cell.appendChild(text);
 		var cell = cell;
 		cellId = $(cell).attr("id");
-		var data = { game_id: gameId, content: "X", coordinates: cellId }
+		var data = { game_id: gameId, content: outside.sign, coordinates: cellId }
 		$.ajax({
 			dataType: "json",
 			method: "PUT",
