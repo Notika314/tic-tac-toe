@@ -35,9 +35,9 @@ get "/games/:id" do
 end
 
 get "/games/:id/check_update" do 
-	# Employees.where(company_id: company_id, race: 'African',  foreign: 1).pluck(:id_number)
+	# Message.order(created_at: :asc).last(10)
 	@game = Game.find_by(id: params[:id])
-	@updated_cell = Cell.where( new_update: "yes",content: "X",game_id: @game.id).last(1)
+	@updated_cell = Cell.where( new_update: "yes",content: "X",game_id: @game.id).order(updated_at: :asc).last(1)
 
 	unless @game.player2_id.nil?
 		@player = Player.find_by(id: @game.player2_id)

@@ -2,6 +2,7 @@
 var outside ={
 	empty: true,
 	updatedCells: 0,
+	updatedCell: -1,
 };
 $(document).ready(function() {
 	$("#login_button").click(function() {
@@ -68,7 +69,9 @@ $(document).ready(function() {
 	});
 	$(".cell").click(function() {
 		var cell = this;
-		outside.updatedCells += 1;
+		// outside.updatedCells += 1;
+		outside.updatedCell = $(this).attr("id");
+		console.log(outside.updatedCell);
 		var gameId = $("table").attr("id").split("-")[1];
 		if (outside.game.me.active===true && $(cell).text()=="") {
 			$(this).append("<h2 class='huge'></h2>");
@@ -104,7 +107,9 @@ $(document).ready(function() {
 					url: "/games/" + game_id + "/check_update"
 				}).done(function(response) { 
 					console.log(response);
-					if (response.cell.length > outside.updatedCells) {
+					if ( response.cell[0].coordinates != outside.updatedCell ) { 
+						console.log("yessssss");
+					// if (response.cell.length > outside.updatedCells) {
 						var coordinates = response.cell[response.cell.length-1].coordinates;
 						var cellToUpdate = document.getElementById(coordinates);
 						$(cellToUpdate).text("X");
