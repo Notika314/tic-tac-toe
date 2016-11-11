@@ -36,7 +36,7 @@ var Player = function(id,status) {
 			url: "../cells/" + cellId,
 			data: data
 		}).done(function(response) {
-			console.log(response);
+		
 		})
 	}
 }

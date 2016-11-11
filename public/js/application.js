@@ -1,4 +1,4 @@
-// alert("hi")
+
 var outside ={
 	empty: true,
 	updatedCells: 0,
@@ -29,7 +29,6 @@ $(document).ready(function() {
 		$("table").toggleClass("hidden");
 		var table = $("table").attr("class").split(" ");
 		var currentPlayer = table[table.length-1];
-		console.log("currentPlayer: " + currentPlayer);
 		var classNames = $("#new_game").attr("class").split(" ");
 		var className = classNames[0].split("-")[1];
 		var data = { firstPlayerId: className }
@@ -56,16 +55,15 @@ $(document).ready(function() {
 		var gameId = $("table").attr("id").split("-")[1];
 		var table = $("table").attr("class").split(" ");
 		var currentPlayer = table[table.length-1];
-		// if (currentPlayer == outside.game.me.id.split("-")[1]) { 
-		// 	outside.sign = "0";
-		// 	outside.opponentsSign = "X";
-		// }
+		if (currentPlayer == outside.game.me.id.split("-")[1]) { 
+			outside.sign = "0";
+			outside.opponentsSign = "X";
+		}
 		outside.gameId = gameId;
 		outside.joined = "true";
 	});
 	$(".cell").click(function() {
 		var cell = this;
-		console.log(outside.updatedCell);
 		var gameId = $("table").attr("id").split("-")[1];
 		if (outside.game.me.active===true && $(cell).text()=="") {
 			$(this).append("<h2 class='huge'></h2>");
@@ -89,7 +87,6 @@ $(document).ready(function() {
 						outside.game.me.active=true;
 						var player2_id = response.game.player2_id;
 						var player1_id = outside.game.player1_id;
-						console.log("before if ststaement");
 						if (response.game.player1_id == outside.game.me.id)  {
 							outside.game.opponent.id = response.game.player2_id;
 							var player2_name = response.player2_name;
@@ -103,6 +100,8 @@ $(document).ready(function() {
 					method: "GET",
 					url: "/games/" + game_id + "/check_update"
 				}).done(function(response) { 
+					console.log(response);
+					console.log(outside);
 					if ( response.cell[0].coordinates != outside.updatedCell ) { 
 						var coordinates = response.cell[response.cell.length-1].coordinates;
 						var cellToUpdate = document.getElementById(coordinates);
