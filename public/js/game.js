@@ -1,4 +1,7 @@
 var Game = function(id1,id2) {
+	var takenCells = [];
+	var winningNumber = 0;
+	var winning_combinations = [["0","1","2"],["3","4","5"],["6","7","8"],["0","3","6"],["1","4","7"],["2","5","8"],["0","4","8"],["2","4","6"]]
 	this.players = [];
 	var status1 = "me";
 	var status2 = "opponent";
@@ -16,8 +19,32 @@ var Game = function(id1,id2) {
 	this.players.push(this.me);
 	this.players.push(this.opponent);
 	this.movePlayer = function(cell,gameId) {
+		var cellId = $(cell).attr("id");
+		takenCells.push(cellId);
+		for (var i = 0; i < winning_combinations.length; i ++ ) {
+		    var gameOver = 0;
+			for ( var j = 0; j < winning_combinations[i].length; j ++) {
+				if ( takenCells.includes(winning_combinations[i][j]) ) {
+					gameOver += 1; 
+				} else {
+					gameOver += 0;
+				}
+			}
+			if ( gameOver == 3) {
+				winningNumber = i;
+			}
+		}
+		if (winningNumber > 0) {
+			var winningCo;
+			for ( var j = 0; j < winning_combinations[winningNumber].length ; j ++ ) {
+				var ind = winning_combinations[winningNumber][j];
+				var celll = $("td#" + ind);
+				console.log(celll);
+				$(celll).css("background-color", "red");
+			}
+		}
+
 		this.me.move(cell,gameId);
-		//insert "X" or "O" in cell, depending on player
 	}
 }
 var Player = function(id,status) {
